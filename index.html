@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+    <script
+      src="https://kit.fontawesome.com/1aa3b3d4de.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+      :root {
+        --primary: #ffa931;
+        --secondary: #6ebfb5;
+        --third: #fd3a69;
+      }
+      body {
+        text-align: center;
+      }
+      .box {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-gap: 1rem;
+      }
+      h1 {
+        font-family: "Roboto", sans-serif;
+      }
+      .item-1 {
+        background-color: var(--primary);
+      }
+      .total,
+      .death,
+      .recovered {
+        font-size: 1.5rem;
+      }
+      .item-2 {
+        background-color: var(--secondary);
+      }
+      .item-3 {
+        background-color: var(--third);
+      }
+      i {
+        margin-bottom: 0.3rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="item-1">
+        <h1>Total Cases</h1>
+        <i class="fas fa-virus" style="font-size: 50px;"></i>
+        <div class="total"></div>
+      </div>
+      <div class="item-2">
+        <h1>Total Deaths</h1>
+        <i class="fas fa-skull-crossbones" style="font-size: 50px;"></i>
+        <div class="death"></div>
+      </div>
+      <div class="item-3">
+        <h1>Recovered Cases</h1>
+        <i class="fas fa-heartbeat" style="font-size: 50px;"></i>
+        <div class="recovered"></div>
+      </div>
+    </div>
+  </body>
+  <script>
+    checkcovid();
+    function checkcovid() {
+      //api of covid
+      var url = "https://api.covid19api.com/summary";
+      //function to get data
+      $.get(url, function (data) {
+        $(".total").text(data.Global.TotalConfirmed);
+        $(".death").text(data.Global.TotalDeaths);
+        $(".recovered").text(data.Global.TotalRecovered);
+      });
+    }
+  </script>
+</html>
